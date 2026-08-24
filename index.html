@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Soundaryam Beauty Zone - Exclusive Voucher ✨</title>
+
+  <!-- 🌟 WHATSAPP CARD PREVIEW (OPEN GRAPH TAGS) 🌟 -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Soundaryam Beauty Zone - Free Service Voucher ✨">
+  <meta property="og:description" content="Scratch the card to unlock your Guaranteed FREE Beauty Service on orders above ₹500!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600">
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -115,7 +122,7 @@
     .action-section { width: 100%; max-width: 320px; margin-bottom: 10px; }
     .terms { color: #7e6c9c; font-size: 11px; margin-top: 10px; }
 
-    /* --- 🌟 POPUP OVERLAY MODAL EFFECT 🌟 --- */
+    /* 🌟 POPUP MODAL STYLES WITH ANIMATION 🌟 */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -123,12 +130,16 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(8, 3, 18, 0.85);
+      background: rgba(8, 3, 18, 0.88);
       backdrop-filter: blur(8px);
-      z-index: 999;
+      z-index: 99999;
       align-items: center;
       justify-content: center;
       padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex !important;
     }
 
     .popup-card {
@@ -138,14 +149,14 @@
       text-align: center;
       width: 100%;
       max-width: 320px;
-      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.4), 0 0 30px rgba(255, 215, 0, 0.5);
+      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.5), 0 0 35px rgba(255, 215, 0, 0.6);
       border: 3px solid #ffd700;
-      animation: popupBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation: popupBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     @keyframes popupBounce {
-      0% { transform: scale(0.3) translateY(100px); opacity: 0; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .popup-badge {
@@ -159,26 +170,9 @@
       margin-bottom: 12px;
     }
 
-    .popup-title {
-      color: #880e4f;
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .popup-offer {
-      color: #d81b60;
-      font-size: 22px;
-      font-weight: 900;
-      margin: 8px 0;
-    }
-
-    .popup-desc {
-      color: #424242;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
+    .popup-title { color: #880e4f; font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+    .popup-offer { color: #d81b60; font-size: 22px; font-weight: 900; margin: 8px 0; }
+    .popup-desc { color: #424242; font-size: 12px; font-weight: 600; margin-bottom: 18px; }
 
     .btn-claim {
       background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
@@ -214,7 +208,7 @@
     <div class="scratch-container">
       <div class="reward-layer">
         <h3>🎉 CONGRATULATIONS! 🎉</h3>
-        <h2 class="rewardTitle">FREE Head Massage</h2>
+        <h2 class="rewardTitle">FREE Service</h2>
         <p>Redeemable FREE on your next visit!</p>
         <div class="voucher-tag">LUCKY VOUCHER • ₹500+ PACKAGES</div>
       </div>
@@ -226,12 +220,12 @@
     </div>
   </div>
 
-  <!-- 🌟 POPUP MODAL SCREEN 🌟 -->
+  <!-- 🌟 POPUP MODAL 🌟 -->
   <div class="modal-overlay" id="popupModal">
     <div class="popup-card">
       <div class="popup-badge">🎁 VOUCHER UNLOCKED!</div>
       <div class="popup-title">YOU HAVE WON</div>
-      <div class="popup-offer" id="popupReward">FREE Head Massage</div>
+      <div class="popup-offer" id="popupReward">FREE Service</div>
       <div class="popup-desc">Valid automatically on your next billing of ₹500 or above at Soundaryam Beauty Zone.</div>
       <a id="waBtn" class="btn-claim" href="#" target="_blank">
         CLAIM ON WHATSAPP NOW ➔
@@ -251,12 +245,11 @@
 
     const randomOffer = offers[Math.floor(Math.random() * offers.length)];
     
-    // Set titles
     document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = randomOffer.title);
     document.getElementById('popupReward').innerText = randomOffer.title;
     
-    // WhatsApp setup
-    const waNumber = "91YOURNUMBERHERE"; 
+    // ⚠️ अपना WhatsApp नंबर यहाँ डालें
+    const waNumber = "919999999999"; 
     const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and unlocked a ${randomOffer.title} on packages above ₹500! (Code: ${randomOffer.code})`);
     document.getElementById('waBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
 
@@ -306,7 +299,7 @@
 
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(pos.x, pos.y, 24, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, 26, 0, Math.PI * 2);
       ctx.fill();
 
       checkScratchedPercent();
@@ -316,33 +309,34 @@
       if (isUnlocked) return;
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       let cleared = 0;
-      for (let i = 3; i < imageData.data.length; i += 4) {
+      
+      // Check cleared pixels
+      for (let i = 3; i < imageData.data.length; i += 16) {
         if (imageData.data[i] === 0) cleared++;
       }
 
-      // Trigger pop-up at 35% scratch
-      if (cleared / imageData.data.length > 0.35) {
+      // Trigger pop-up as soon as 25% area is scratched
+      if (cleared / (imageData.data.length / 16) > 0.25) {
         isUnlocked = true;
         
-        // Show Pop-up Modal
-        document.getElementById('popupModal').style.display = 'flex';
+        // Show Pop-up Modal Guaranteed
+        document.getElementById('popupModal').classList.add('active');
         
-        // Confetti Blast Animation
-        confetti({
-          particleCount: 150,
-          spread: 100,
-          origin: { y: 0.5 }
-        });
+        // Blast Confetti
+        try {
+          confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
+        } catch(err){}
       }
     }
 
     canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
     canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
     canvas.addEventListener('mousemove', scratch);
 
-    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false});
     canvas.addEventListener('touchend', () => isDrawing = false);
-    canvas.addEventListener('touchmove', scratch);
+    canvas.addEventListener('touchmove', scratch, {passive: false});
 
     initCanvas();
   </script>
