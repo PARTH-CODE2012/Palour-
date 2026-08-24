@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Beauty Gift For You! ✨</title>
+  <!-- Confetti Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .card-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 350px;
+      width: 100%;
+      position: relative;
+    }
+    h2 { color: #d63384; margin-bottom: 10px; font-size: 22px; }
+    p { color: #555; font-size: 14px; margin-bottom: 20px; }
+    
+    /* Scratch Card Box */
+    .scratch-area {
+      position: relative;
+      width: 250px;
+      height: 150px;
+      margin: 0 auto 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .reward-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff0f5;
+      border: 2px dashed #ff69b4;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .reward-content h3 { color: #c2185b; font-size: 20px; font-weight: bold; }
+    .reward-content p { color: #333; font-size: 13px; margin-top: 5px; }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    /* WhatsApp Button */
+    .btn-whatsapp {
+      display: none;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      animation: popIn 0.5s ease-out forwards;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    <h2>✨ आपके लिए खास सरप्राइज! ✨</h2>
+    <p>नीचे दिए गए कार्ड को अपनी उंगली से स्क्रैच (घिसें) करें और अपना ऑफर देखें!</p>
+
+    <div class="scratch-area">
+      <div class="reward-content">
+        <h3>🎉 FREE D-Tan / Head Massage</h3>
+        <p>किसी भी सर्विस के साथ! (Exclusive VIP Pass)</p>
+      </div>
+      <canvas id="scratchCanvas" width="250" height="150"></canvas>
+    </div>
+
+    <a id="waBtn" class="btn-whatsapp" href="https://wa.me/91YOURNUMBERHERE?text=Hi!%20I%20scratched%20the%20card%20and%20want%20to%20claim%20my%20VIP%20Offer!" target="_blank">
+      🎁 क्लेम करें व्हाट्सएप पर
+    </a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let scrapedPixels = 0;
+
+    // Fill canvas with shiny metallic cover
+    ctx.fillStyle = '#C0C0C0';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Add text on top of scratch cover
+    ctx.fillStyle = '#555';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('यहाँ स्क्रैच करें! 🪙', canvas.width / 2, canvas.height / 2 + 5);
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fill();
+
+      checkScratchPercentage();
+    }
+
+    function checkScratchPercentage() {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      let clearPixels = 0;
+      for (let i = 3; i < imageData.data.length; i += 4) {
+        if (imageData.data[i] === 0) clearPixels++;
+      }
+
+      // If more than 40% is scratched, reveal all and trigger celebration
+      if (clearPixels / imageData.data.length > 0.4) {
+        canvas.style.display = 'none';
+        document.getElementById('waBtn').style.display = 'inline-block';
+        triggerConfetti();
+      }
+    }
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mousemove', scratch);
+
+    canvas.addEventListener('touchstart', () => isDrawing = true);
+    canvas.addEventListener('touchend', () => isDrawing = false);
+    canvas.addEventListener('touchmove', scratch);
+  </script>
+</body>
+</html>
