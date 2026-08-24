@@ -1,60 +1,106 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Special Beauty Gift For You! ✨</title>
-  <!-- Confetti Animation Library -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Soundaryam Beauty Zone - Exclusive Voucher ✨</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body {
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-      min-height: 100vh;
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #090514;
+      background: radial-gradient(circle at center, #2e0854 0%, #080312 100%);
+      color: #fff;
+    }
+
+    .app-screen {
+      width: 100vw;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
+      justify-content: space-between;
+      padding: 24px 16px 20px 16px;
       text-align: center;
+      position: relative;
     }
-    .card-container {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 25px;
+
+    .brand-header { width: 100%; margin-top: 10px; }
+
+    .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(255, 226, 89, 0.3);
+    }
+
+    .brand-subtitle {
+      color: #d1c4e9;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .offer-details { margin: 10px 0; }
+    .offer-title { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
+
+    .offer-desc {
+      color: #b3a2c7;
+      font-size: 13px;
+      line-height: 1.4;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .highlight-text { color: #ffd700; font-weight: 700; }
+
+    .scratch-container {
+      position: relative;
+      width: 300px;
+      height: 180px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      max-width: 350px;
-      width: 100%;
-      position: relative;
-    }
-    h2 { color: #d63384; margin-bottom: 10px; font-size: 22px; }
-    p { color: #555; font-size: 14px; margin-bottom: 20px; }
-    
-    /* Scratch Card Box */
-    .scratch-area {
-      position: relative;
-      width: 250px;
-      height: 150px;
-      margin: 0 auto 20px auto;
-      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.2);
     }
-    .reward-content {
+
+    .reward-layer {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: #fff0f5;
-      border: 2px dashed #ff69b4;
-      border-radius: 12px;
+      background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 16px;
+      border: 3px dashed #e91e63;
     }
-    .reward-content h3 { color: #c2185b; font-size: 20px; font-weight: bold; }
-    .reward-content p { color: #333; font-size: 13px; margin-top: 5px; }
+
+    .reward-layer h3 { color: #880e4f; font-size: 13px; font-weight: 800; letter-spacing: 1px; }
+    .reward-layer h2 { color: #d81b60; font-size: 20px; font-weight: 800; margin: 4px 0; }
+    .reward-layer p { color: #424242; font-size: 12px; font-weight: 600; text-align: center; }
+    
+    .voucher-tag {
+      background: #fce4ec;
+      color: #c2185b;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
 
     canvas {
       position: absolute;
@@ -63,107 +109,162 @@
       width: 100%;
       height: 100%;
       cursor: pointer;
-      border-radius: 12px;
+      touch-action: none;
     }
 
-    /* WhatsApp Button */
-    .btn-whatsapp {
+    .action-section { width: 100%; max-width: 320px; margin-bottom: 10px; }
+
+    .btn-claim {
       display: none;
-      background-color: #25D366;
-      color: white;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #ffffff;
       text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
       animation: popIn 0.5s ease-out forwards;
     }
+
     @keyframes popIn {
       0% { transform: scale(0.8); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
+
+    .terms { color: #7e6c9c; font-size: 11px; margin-top: 10px; }
   </style>
 </head>
 <body>
 
-  <div class="card-container">
-    <h2>✨ आपके लिए खास सरप्राइज! ✨</h2>
-    <p>नीचे दिए गए कार्ड को अपनी उंगली से स्क्रैच (घिसें) करें और अपना ऑफर देखें!</p>
-
-    <div class="scratch-area">
-      <div class="reward-content">
-        <h3>🎉 FREE D-Tan / Head Massage</h3>
-        <p>किसी भी सर्विस के साथ! (Exclusive VIP Pass)</p>
-      </div>
-      <canvas id="scratchCanvas" width="250" height="150"></canvas>
+  <div class="app-screen">
+    <div class="brand-header">
+      <div class="brand-name">Soundaryam Beauty Zone</div>
+      <div class="brand-subtitle">Luxury Beauty & Hair Studio</div>
     </div>
 
-    <a id="waBtn" class="btn-whatsapp" href="https://wa.me/91YOURNUMBERHERE?text=Hi!%20I%20scratched%20the%20card%20and%20want%20to%20claim%20my%20VIP%20Offer!" target="_blank">
-      🎁 क्लेम करें व्हाट्सएप पर
-    </a>
+    <div class="offer-details">
+      <div class="offer-title">Scratch Me! 🪙</div>
+      <div class="offer-desc">
+        Get an Exclusive Free Service Voucher! <br>
+        <span class="highlight-text">Valid on any package worth ₹500 & Above.</span>
+      </div>
+    </div>
+
+    <div class="scratch-container">
+      <div class="reward-layer">
+        <h3>🎉 CONGRATULATIONS! 🎉</h3>
+        <h2 id="rewardTitle">FREE Head Massage</h2>
+        <p>Redeemable FREE on your next visit!</p>
+        <div class="voucher-tag">LUCKY VOUCHER • ₹500+ PACKAGES</div>
+      </div>
+      <canvas id="scratchCanvas" width="300" height="180"></canvas>
+    </div>
+
+    <div class="action-section">
+      <a id="waBtn" class="btn-claim" href="#" target="_blank">
+        CLAIM VOUCHER ON WHATSAPP ➔
+      </a>
+      <div class="terms">*Voucher unlocks automatically on billing ₹500+</div>
+    </div>
   </div>
 
   <script>
+    // आपकी 6 चुनिंदा सर्विसेज की लिस्ट
+    const offers = [
+      { title: "FREE Head Massage", code: "HEADMASSAGE500" },
+      { title: "FREE Thread Work", code: "THREADWORK500" },
+      { title: "FREE Face Clean Up", code: "CLEANUP500" },
+      { title: "FREE Hair Oiling", code: "HAIROILING500" },
+      { title: "FREE D-Tan Treatment", code: "DTAN500" },
+      { title: "FREE Face Bleach", code: "BLEACH500" }
+    ];
+
+    // रैंडम ऑफर सेलेक्ट करना
+    const randomOffer = offers[Math.floor(Math.random() * offers.length)];
+    document.getElementById('rewardTitle').innerText = randomOffer.title;
+    
+    // WhatsApp लिंक सेटअप (यहाँ अपना 10 अंकों का नंबर डालें)
+    const waNumber = "91YOURNUMBERHERE"; 
+    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and won a ${randomOffer.title} on packages above ₹500! (Code: ${randomOffer.code})`);
+    document.getElementById('waBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
+
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
-    let scrapedPixels = 0;
 
-    // Fill canvas with shiny metallic cover
-    ctx.fillStyle = '#C0C0C0';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Add text on top of scratch cover
-    ctx.fillStyle = '#555';
-    ctx.font = 'bold 16px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('यहाँ स्क्रैच करें! 🪙', canvas.width / 2, canvas.height / 2 + 5);
+    function initCanvas() {
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#BF953F');
+      grad.addColorStop(0.25, '#FCF6BA');
+      grad.addColorStop(0.5, '#B38728');
+      grad.addColorStop(0.75, '#FBF5B7');
+      grad.addColorStop(1, '#AA771C');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 2;
+      for (let i = -100; i < canvas.width + 100; i += 20) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i + 50, canvas.height);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = '#3d2b00';
+      ctx.font = '900 16px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.shadowColor = 'rgba(255,255,255,0.5)';
+      ctx.shadowBlur = 4;
+      ctx.fillText('✨ SCRATCH ME HERE ✨', canvas.width / 2, canvas.height / 2 + 6);
+    }
+
+    function getMousePos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
 
     function scratch(e) {
       if (!isDrawing) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX || e.touches[0].clientX) - rect.left;
-      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      e.preventDefault();
+      const pos = getMousePos(e);
 
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, 24, 0, Math.PI * 2);
       ctx.fill();
 
-      checkScratchPercentage();
+      checkScratchedPercent();
     }
 
-    function checkScratchPercentage() {
+    function checkScratchedPercent() {
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      let clearPixels = 0;
+      let cleared = 0;
       for (let i = 3; i < imageData.data.length; i += 4) {
-        if (imageData.data[i] === 0) clearPixels++;
+        if (imageData.data[i] === 0) cleared++;
       }
 
-      // If more than 40% is scratched, reveal all and trigger celebration
-      if (clearPixels / imageData.data.length > 0.4) {
+      if (cleared / imageData.data.length > 0.35) {
         canvas.style.display = 'none';
-        document.getElementById('waBtn').style.display = 'inline-block';
-        triggerConfetti();
+        document.getElementById('waBtn').style.display = 'block';
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       }
     }
 
-    function triggerConfetti() {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
-
-    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mousemove', scratch);
 
-    canvas.addEventListener('touchstart', () => isDrawing = true);
+    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
     canvas.addEventListener('touchend', () => isDrawing = false);
     canvas.addEventListener('touchmove', scratch);
+
+    initCanvas();
   </script>
 </body>
 </html>
