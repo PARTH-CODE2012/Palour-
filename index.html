@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Soundaryam Beauty Zone - Exclusive Voucher ✨</title>
+  <title>Soundaryam Beauty Zone - Exclusive Scratch Voucher ✨</title>
 
   <!-- 🌟 WHATSAPP CARD PREVIEW (OPEN GRAPH TAGS) 🌟 -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Soundaryam Beauty Zone - Free Voucher ✨">
-  <meta property="og:description" content="Scratch to win FREE Hair Spa, D-Tan, Head Massage & more on billing ₹500+!">
-  <!-- ⚠️ अपनी कोई भी पार्लर या स्क्रैच कार्ड की इमेज URL यहाँ बदलें -->
+  <meta property="og:title" content="Soundaryam Beauty Zone - Free Service Voucher ✨">
+  <meta property="og:description" content="Scratch the card to unlock your Guaranteed FREE Beauty Service on orders above ₹500!">
   <meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800">
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -25,7 +24,7 @@
       color: #fff;
     }
 
-    /* 🎥 BACKGROUND VIDEO STYLES 🎥 */
+    /* 🎥 BACKGROUND 3D SALON VIDEO 🎥 */
     .bg-video {
       position: fixed;
       top: 50%;
@@ -37,7 +36,7 @@
       z-index: 1;
       transform: translate(-50%, -50%);
       object-fit: cover;
-      filter: brightness(0.35) blur(1px);
+      filter: brightness(0.4) blur(1px);
     }
 
     .app-screen {
@@ -49,7 +48,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 16px;
+      padding: 24px 16px 20px 16px;
       text-align: center;
     }
 
@@ -77,29 +76,43 @@
 
     .contact-info {
       background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(5px);
-      padding: 4px 14px;
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
       border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
       color: #ffd700;
       display: inline-block;
-      margin-top: 6px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      margin-top: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
     .offer-details { margin: 6px 0; }
-    .offer-title { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+    .offer-title { font-size: 19px; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
     .offer-desc { color: #d1c4e9; font-size: 12px; line-height: 1.4; max-width: 320px; margin: 0 auto; }
     .highlight-text { color: #ffd700; font-weight: 700; }
 
+    /* 🎴 SCRATCH CARD CONTAINER & POP-UP ANIMATION 🎴 */
     .scratch-container {
       position: relative;
-      width: 300px;
-      height: 170px;
+      width: 310px;
+      height: 180px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.3);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* 3D Pop Effect when scratched */
+    .scratch-container.pop-effect {
+      animation: cardPop3D 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes cardPop3D {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.25) rotate(-3deg); box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 50px rgba(255, 215, 0, 0.8); }
+      100% { transform: scale(1) rotate(0deg); }
     }
 
     .reward-layer {
@@ -117,7 +130,7 @@
     }
 
     .reward-layer h3 { color: #880e4f; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
-    .reward-layer h2 { color: #d81b60; font-size: 20px; font-weight: 800; margin: 4px 0; }
+    .reward-layer h2 { color: #d81b60; font-size: 22px; font-weight: 900; margin: 4px 0; text-align: center; }
     
     .voucher-tag {
       background: #fce4ec;
@@ -139,88 +152,38 @@
       touch-action: none;
     }
 
-    .action-section { width: 100%; max-width: 320px; margin-bottom: 10px; }
-    .terms { color: #b3a2c7; font-size: 11px; margin-top: 6px; }
-
-    /* 🟢 WHATSAPP POPUP MODAL STYLES 🟢 */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(11, 20, 26, 0.9);
-      backdrop-filter: blur(10px);
-      z-index: 99999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active { display: flex !important; }
-
-    .wa-popup-card {
-      background: #111b21;
-      border-radius: 24px;
-      padding: 22px 18px;
-      text-align: center;
+    /* 📝 ENGLISH INSTRUCTION BOX BELOW SCRATCH CARD 📝 */
+    .instruction-card {
       width: 100%;
       max-width: 320px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(37, 211, 102, 0.4);
-      border: 1px solid #222d34;
-      animation: popupZoom 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      background: rgba(18, 10, 35, 0.75);
+      backdrop-filter: blur(10px);
+      border: 1px dashed #ffd700;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
 
-    @keyframes popupZoom {
-      0% { transform: scale(0.3); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .wa-icon-circle {
-      width: 54px;
-      height: 54px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px auto;
-      box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-    }
-
-    .wa-icon-circle svg { width: 30px; height: 30px; fill: #ffffff; }
-
-    .wa-popup-title { color: #25D366; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; }
-    .wa-popup-reward { color: #ffffff; font-size: 21px; font-weight: 900; margin: 6px 0; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-    
-    .instruction-box {
-      background: #182229;
-      border: 1px dashed #25D366;
-      border-radius: 12px;
-      padding: 10px;
-      margin: 12px 0;
-      color: #e9edef;
+    .instruction-text {
+      color: #ffffff;
       font-size: 11px;
       line-height: 1.5;
+      font-weight: 600;
     }
 
-    .instruction-box span { color: #ffd700; font-weight: 700; }
-
-    .btn-wa-claim {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      color: #ffffff;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
+    .instruction-text span {
+      color: #ffd700;
       font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.3px;
+    }
+
+    .wa-link-btn {
+      display: inline-block;
+      margin-top: 6px;
+      color: #25D366;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -235,76 +198,61 @@
     <div class="brand-header">
       <div class="brand-name">Soundaryam Beauty Zone</div>
       <div class="brand-subtitle">Luxury Beauty & Hair Studio</div>
-      <div class="contact-info">📞 Contact: +91 99999 99999</div>
+      <div class="contact-info">📞 Call / WhatsApp: +91 9910711437</div>
     </div>
 
     <div class="offer-details">
       <div class="offer-title">Scratch & Win 🪙</div>
       <div class="offer-desc">
-        Unlock your Exclusive Free Beauty Service Voucher! <br>
-        <span class="highlight-text">Valid on billing worth ₹500 & Above.</span>
+        Unlock your Guaranteed FREE Beauty Service Voucher! <br>
+        <span class="highlight-text">Valid on service billing worth ₹500 & Above.</span>
       </div>
     </div>
 
-    <div class="scratch-container">
+    <!-- 🎴 SCRATCH CARD 🎴 -->
+    <div class="scratch-container" id="cardContainer">
       <div class="reward-layer">
         <h3>🎉 CONGRATULATIONS! 🎉</h3>
         <h2 class="rewardTitle">FREE Service</h2>
-        <p style="color: #666; font-size: 11px;">Valid on billing ₹500+</p>
+        <p style="color: #666; font-size: 11px; font-weight: 700;">Valid on billing of ₹500+</p>
         <div class="voucher-tag">SOUNDARYAM EXCLUSIVE VOUCHER</div>
       </div>
-      <canvas id="scratchCanvas" width="300" height="170"></canvas>
+      <canvas id="scratchCanvas" width="310" height="180"></canvas>
     </div>
 
-    <div class="action-section">
-      <div class="terms">*Offer unlocks automatically on billing ₹500+</div>
-    </div>
-  </div>
-
-  <!-- 🟢 WHATSAPP STYLE MODAL POP-UP 🟢 -->
-  <div class="modal-overlay" id="popupModal">
-    <div class="wa-popup-card">
-      <div class="wa-icon-circle">
-        <svg viewBox="0 0 32 32">
-          <path d="M16 2a13 13 0 0 0-11 20L3 29l7.2-1.9A13 13 0 1 0 16 2zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4A11 11 0 1 1 16 26zm6-8.2c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 8.9 8.9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6s.3-.4.5-.6l.3-.4c.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4 2.4 3.7 5.8 5.1c.8.3 1.4.6 1.9.7.8.3 1.5.2 2.1.1.7-.1 2.2-.9 2.5-1.8s.3-1.6.2-1.8c-.1-.1-.3-.2-.6-.4z"/>
-        </svg>
+    <!-- 📝 INSTRUCTION BOX (ONLY ENGLISH) 📝 -->
+    <div class="instruction-card">
+      <div class="instruction-text">
+        📸 <b>Take a screenshot of this scratched voucher!</b><br>
+        Send this screenshot to <span>+91 9910711437</span> on WhatsApp to claim your FREE service on any service booking worth ₹500 or above.
       </div>
-      <div class="wa-popup-title">Voucher Unlocked! 🎉</div>
-      <div class="wa-popup-reward" id="popupReward">FREE Service</div>
-      
-      <div class="instruction-box">
-        📸 <b>Take a Screenshot of this Screen!</b><br>
-        Send this screenshot on WhatsApp. Valid on any billing of <span>₹500 & above</span> at Soundaryam Beauty Zone!
-      </div>
-
-      <a id="waBtn" class="btn-wa-claim" href="#" target="_blank">
-        SEND SCREENSHOT ON WHATSAPP ➔
-      </a>
+      <a class="wa-link-btn" id="waDirectBtn" href="#" target="_blank">Click Here to Open WhatsApp ➔</a>
     </div>
   </div>
 
   <script>
+    // 🎲 RANDOM OFFERS (हर बार अलग निकलेगा)
     const offers = [
       { title: "FREE Head Massage", code: "HEADMASSAGE500" },
       { title: "FREE Thread Work", code: "THREADWORK500" },
       { title: "FREE Face Clean Up", code: "CLEANUP500" },
       { title: "FREE Hair Oiling", code: "HAIROILING500" },
       { title: "FREE D-Tan Treatment", code: "DTAN500" },
-      { title: "FREE Face Bleach", code: "BLEACH500" }
+      { title: "FREE Face Bleach", code: "BLEACH500" },
+      { title: "FREE Hair Spa Session", code: "HAIRSPA500" }
     ];
 
     const randomOffer = offers[Math.floor(Math.random() * offers.length)];
-    
     document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = randomOffer.title);
-    document.getElementById('popupReward').innerText = randomOffer.title;
-    
-    // ⚠️ अपना WhatsApp नंबर यहाँ सेट करें
-    const waNumber = "919999999999"; 
-    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and unlocked ${randomOffer.title}! Here is my screenshot for claim on billing ₹500+ (Code: ${randomOffer.code})`);
-    document.getElementById('waBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
+
+    // 📱 Phone & WhatsApp Setup
+    const waNumber = "919910711437"; 
+    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and won a ${randomOffer.title}! Attached is my screenshot for claim on billing ₹500+ (Voucher Code: ${randomOffer.code})`);
+    document.getElementById('waDirectBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
 
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
+    const cardContainer = document.getElementById('cardContainer');
     let isDrawing = false;
     let isUnlocked = false;
 
@@ -349,7 +297,7 @@
 
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(pos.x, pos.y, 26, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, 28, 0, Math.PI * 2);
       ctx.fill();
 
       checkScratchedPercent();
@@ -364,11 +312,20 @@
         if (imageData.data[i] === 0) cleared++;
       }
 
+      // 25% स्क्रैच होते ही ट्रिगर होगा
       if (cleared / (imageData.data.length / 16) > 0.25) {
         isUnlocked = true;
-        document.getElementById('popupModal').classList.add('active');
+        
+        // 1. 3D Pop Effect Trigger (Card Zoom & Back)
+        cardContainer.classList.add('pop-effect');
+
+        // 2. Balloons & Confetti Effect
         try {
-          confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
+          confetti({
+            particleCount: 180,
+            spread: 120,
+            origin: { y: 0.6 }
+          });
         } catch(err){}
       }
     }
