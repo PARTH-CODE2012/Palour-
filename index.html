@@ -113,28 +113,86 @@
     }
 
     .action-section { width: 100%; max-width: 320px; margin-bottom: 10px; }
+    .terms { color: #7e6c9c; font-size: 11px; margin-top: 10px; }
+
+    /* --- 🌟 POPUP OVERLAY MODAL EFFECT 🌟 --- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(8, 3, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .popup-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.4), 0 0 30px rgba(255, 215, 0, 0.5);
+      border: 3px solid #ffd700;
+      animation: popupBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popupBounce {
+      0% { transform: scale(0.3) translateY(100px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .popup-badge {
+      background: #e91e63;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .popup-title {
+      color: #880e4f;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .popup-offer {
+      color: #d81b60;
+      font-size: 22px;
+      font-weight: 900;
+      margin: 8px 0;
+    }
+
+    .popup-desc {
+      color: #424242;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
 
     .btn-claim {
-      display: none;
       background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
       color: #ffffff;
       text-decoration: none;
+      display: block;
       width: 100%;
       padding: 16px;
       border-radius: 14px;
       font-weight: 800;
-      font-size: 15px;
+      font-size: 14px;
       letter-spacing: 0.5px;
       box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-      animation: popIn 0.5s ease-out forwards;
     }
-
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .terms { color: #7e6c9c; font-size: 11px; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -156,7 +214,7 @@
     <div class="scratch-container">
       <div class="reward-layer">
         <h3>🎉 CONGRATULATIONS! 🎉</h3>
-        <h2 id="rewardTitle">FREE Head Massage</h2>
+        <h2 class="rewardTitle">FREE Head Massage</h2>
         <p>Redeemable FREE on your next visit!</p>
         <div class="voucher-tag">LUCKY VOUCHER • ₹500+ PACKAGES</div>
       </div>
@@ -164,15 +222,24 @@
     </div>
 
     <div class="action-section">
-      <a id="waBtn" class="btn-claim" href="#" target="_blank">
-        CLAIM VOUCHER ON WHATSAPP ➔
-      </a>
       <div class="terms">*Voucher unlocks automatically on billing ₹500+</div>
     </div>
   </div>
 
+  <!-- 🌟 POPUP MODAL SCREEN 🌟 -->
+  <div class="modal-overlay" id="popupModal">
+    <div class="popup-card">
+      <div class="popup-badge">🎁 VOUCHER UNLOCKED!</div>
+      <div class="popup-title">YOU HAVE WON</div>
+      <div class="popup-offer" id="popupReward">FREE Head Massage</div>
+      <div class="popup-desc">Valid automatically on your next billing of ₹500 or above at Soundaryam Beauty Zone.</div>
+      <a id="waBtn" class="btn-claim" href="#" target="_blank">
+        CLAIM ON WHATSAPP NOW ➔
+      </a>
+    </div>
+  </div>
+
   <script>
-    // आपकी 6 चुनिंदा सर्विसेज की लिस्ट
     const offers = [
       { title: "FREE Head Massage", code: "HEADMASSAGE500" },
       { title: "FREE Thread Work", code: "THREADWORK500" },
@@ -182,18 +249,21 @@
       { title: "FREE Face Bleach", code: "BLEACH500" }
     ];
 
-    // रैंडम ऑफर सेलेक्ट करना
     const randomOffer = offers[Math.floor(Math.random() * offers.length)];
-    document.getElementById('rewardTitle').innerText = randomOffer.title;
     
-    // WhatsApp लिंक सेटअप (यहाँ अपना 10 अंकों का नंबर डालें)
+    // Set titles
+    document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = randomOffer.title);
+    document.getElementById('popupReward').innerText = randomOffer.title;
+    
+    // WhatsApp setup
     const waNumber = "91YOURNUMBERHERE"; 
-    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and won a ${randomOffer.title} on packages above ₹500! (Code: ${randomOffer.code})`);
+    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and unlocked a ${randomOffer.title} on packages above ₹500! (Code: ${randomOffer.code})`);
     document.getElementById('waBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
 
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
     let isDrawing = false;
+    let isUnlocked = false;
 
     function initCanvas() {
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -230,7 +300,7 @@
     }
 
     function scratch(e) {
-      if (!isDrawing) return;
+      if (!isDrawing || isUnlocked) return;
       e.preventDefault();
       const pos = getMousePos(e);
 
@@ -243,16 +313,26 @@
     }
 
     function checkScratchedPercent() {
+      if (isUnlocked) return;
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       let cleared = 0;
       for (let i = 3; i < imageData.data.length; i += 4) {
         if (imageData.data[i] === 0) cleared++;
       }
 
+      // Trigger pop-up at 35% scratch
       if (cleared / imageData.data.length > 0.35) {
-        canvas.style.display = 'none';
-        document.getElementById('waBtn').style.display = 'block';
-        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        isUnlocked = true;
+        
+        // Show Pop-up Modal
+        document.getElementById('popupModal').style.display = 'flex';
+        
+        // Confetti Blast Animation
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.5 }
+        });
       }
     }
 
