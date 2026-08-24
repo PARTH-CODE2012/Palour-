@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Soundaryam Beauty Zone - Exclusive Voucher ✨</title>
 
-  <!-- 🌟 WHATSAPP CARD PREVIEW (OPEN GRAPH TAGS) 🌟 -->
+  <!-- Open Graph Meta Tags for WhatsApp Preview Card -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Soundaryam Beauty Zone - Free Service Voucher ✨">
   <meta property="og:description" content="Scratch the card to unlock your Guaranteed FREE Beauty Service on orders above ₹500!">
@@ -122,7 +122,7 @@
     .action-section { width: 100%; max-width: 320px; margin-bottom: 10px; }
     .terms { color: #7e6c9c; font-size: 11px; margin-top: 10px; }
 
-    /* 🌟 POPUP MODAL STYLES WITH ANIMATION 🌟 */
+    /* 🟢 WHATSAPP STYLE POP-UP MODAL 🟢 */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -130,7 +130,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(8, 3, 18, 0.88);
+      background: rgba(11, 20, 26, 0.88);
       backdrop-filter: blur(8px);
       z-index: 99999;
       align-items: center;
@@ -142,50 +142,81 @@
       display: flex !important;
     }
 
-    .popup-card {
-      background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
-      border-radius: 24px;
+    .wa-popup-card {
+      background: #111b21;
+      border-radius: 20px;
       padding: 24px 20px;
       text-align: center;
       width: 100%;
       max-width: 320px;
-      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.5), 0 0 35px rgba(255, 215, 0, 0.6);
-      border: 3px solid #ffd700;
-      animation: popupBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(37, 211, 102, 0.3);
+      border: 1px solid #222d34;
+      animation: waPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
-    @keyframes popupBounce {
-      0% { transform: scale(0.2); opacity: 0; }
+    @keyframes waPopIn {
+      0% { transform: scale(0.5); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .popup-badge {
-      background: #e91e63;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 14px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 12px;
+    .wa-icon-circle {
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
     }
 
-    .popup-title { color: #880e4f; font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-    .popup-offer { color: #d81b60; font-size: 22px; font-weight: 900; margin: 8px 0; }
-    .popup-desc { color: #424242; font-size: 12px; font-weight: 600; margin-bottom: 18px; }
+    .wa-icon-circle svg {
+      width: 34px;
+      height: 34px;
+      fill: #ffffff;
+    }
 
-    .btn-claim {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      color: #ffffff;
-      text-decoration: none;
-      display: block;
-      width: 100%;
-      padding: 16px;
-      border-radius: 14px;
+    .wa-popup-title {
+      color: #e9edef;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .wa-popup-reward {
+      color: #25D366;
+      font-size: 22px;
       font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      margin: 8px 0;
+    }
+
+    .wa-popup-desc {
+      color: #8696a0;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .btn-wa-claim {
+      background: #25D366;
+      color: #0b141a;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      transition: background 0.2s;
+    }
+
+    .btn-wa-claim:active {
+      background: #1da851;
     }
   </style>
 </head>
@@ -220,15 +251,19 @@
     </div>
   </div>
 
-  <!-- 🌟 POPUP MODAL 🌟 -->
+  <!-- 🟢 WHATSAPP STYLE MODAL POP-UP 🟢 -->
   <div class="modal-overlay" id="popupModal">
-    <div class="popup-card">
-      <div class="popup-badge">🎁 VOUCHER UNLOCKED!</div>
-      <div class="popup-title">YOU HAVE WON</div>
-      <div class="popup-offer" id="popupReward">FREE Service</div>
-      <div class="popup-desc">Valid automatically on your next billing of ₹500 or above at Soundaryam Beauty Zone.</div>
-      <a id="waBtn" class="btn-claim" href="#" target="_blank">
-        CLAIM ON WHATSAPP NOW ➔
+    <div class="wa-popup-card">
+      <div class="wa-icon-circle">
+        <svg viewBox="0 0 32 32">
+          <path d="M16 2a13 13 0 0 0-11 20L3 29l7.2-1.9A13 13 0 1 0 16 2zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4A11 11 0 1 1 16 26zm6-8.2c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 8.9 8.9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6s.3-.4.5-.6l.3-.4c.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4 2.4 3.7 5.8 5.1c.8.3 1.4.6 1.9.7.8.3 1.5.2 2.1.1.7-.1 2.2-.9 2.5-1.8s.3-1.6.2-1.8c-.1-.1-.3-.2-.6-.4z"/>
+        </svg>
+      </div>
+      <div class="wa-popup-title">Voucher Unlocked! 🎉</div>
+      <div class="wa-popup-reward" id="popupReward">FREE Service</div>
+      <div class="wa-popup-desc">Claim your free voucher directly on WhatsApp for orders above ₹500!</div>
+      <a id="waBtn" class="btn-wa-claim" href="#" target="_blank">
+        Send to WhatsApp ➔
       </a>
     </div>
   </div>
@@ -310,19 +345,14 @@
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       let cleared = 0;
       
-      // Check cleared pixels
       for (let i = 3; i < imageData.data.length; i += 16) {
         if (imageData.data[i] === 0) cleared++;
       }
 
-      // Trigger pop-up as soon as 25% area is scratched
       if (cleared / (imageData.data.length / 16) > 0.25) {
         isUnlocked = true;
-        
-        // Show Pop-up Modal Guaranteed
         document.getElementById('popupModal').classList.add('active');
         
-        // Blast Confetti
         try {
           confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
         } catch(err){}
