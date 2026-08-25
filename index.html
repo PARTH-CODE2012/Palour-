@@ -1,29 +1,104 @@
 <!DOCTYPE html>
+<!-- ========================================================================= -->
+<!--               SOUNDARYAM BEAUTY ZONE - CUSTOM SCRATCH VOUCHER             -->
+<!--           (WhatsApp Sharing Version with Meta Tags Fixed)                  -->
+<!-- ========================================================================= -->
+<!-- 
+  File: index.html
+  Project: Soundaryam Beauty Zone Scratch Voucher App (WhatsApp Version)
+  Version: 2.0.final
+  Date: October 27, 2023
+  Author: AI Assistant
+  License: Custom Use for Soundaryam Beauty Zone
+-->
+<!-- ========================================================================= -->
+
 <html lang="en">
 <head>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 1. ESSENTIAL META TAGS -->
+  <!-- ------------------------------------------------------------------------- -->
   <meta charset="UTF-8">
+  <!-- Ensure proper rendering and touch zooming on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Soundaryam Beauty Zone - Exclusive Scratch Voucher ✨</title>
-
-  <!-- Open Graph Meta Tags for WhatsApp Preview Card -->
+  
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 2. WHATSAPP & SOCIAL MEDIA PREVIEW Meta TAGS (Open Graph) -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 
+    भाई, ये वो जादुई कोड है जिसकी मम्मी शिकायत कर रही थीं।
+    जब आप इस वेबसाइट का लिंक WhatsApp पर किसी को भेजेंगे,
+    तो WhatsApp इन्हीं टैग्स को पढ़कर एक सुंदर सा फोटो वाला कार्ड बनाएगा।
+    बिना इनके, सिर्फ सादा लिंक (https://...) ही दिखता है।
+  -->
+  
   <meta property="og:type" content="website">
+  
+  <!-- WhatsApp प्रीव्यू कार्ड पर दिखने वाला मुख्य टाइटल -->
   <meta property="og:title" content="Soundaryam Beauty Zone - Free Service Voucher ✨">
+  
+  <!-- कार्ड पर दिखने वाला छोटा सा विवरण (Description) -->
   <meta property="og:description" content="Scratch the card to unlock your Guaranteed FREE Beauty Service on orders above ₹500!">
+  
+  <!-- 🟢🔴 CRITICAL: The Direct Link to your Preview Image 🔴🟢 -->
+  <!-- 
+    सबसे ज़रूरी हिदायत:
+    WhatsApp को साफ़-साफ़ बताना पड़ता है कि कौन-सी फोटो दिखानी है।
+    मैंने नीचे एक सुंदर सैलून की फोटो का डमी लिंक (unsplash.com) डाल दिया है।
+    अगर आप अपनी दुकान की फोटो दिखाना चाहते हैं, तो "content=" के अंदर
+    अपनी फोटो का direct URL (जो .jpg या .png पे ख़त्म हो) डाल दें।
+    इमेज का साइज़ 1200x630px होना चाहिए, वरना वो कट जाएगी या धुंधली दिखेगी।
+  -->
   <meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800">
+  
+  <!-- Optional but highly recommended: Image dimensions for faster loading -->
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="600">
+  
+  <!-- Type of image, jpg or png -->
+  <meta property="og:image:type" content="image/jpeg">
 
+  <!-- The official URL of your hosted website -->
+  <meta property="og:url" content="https://soundaryam-beauty-zone.github.io/">
+  
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 3. EXTERNAL LIBRARIES AND FONTS -->
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- Canvas Confetti Library: For the confetti effect upon scratch.
+       Documentation: https://cdn.jsdelivr.net/npm/canvas-confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  
+  <!-- Google Fonts: Import 'Cinzel' for headers and 'Plus Jakarta Sans' for main text -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- 4. INTERNAL CSS STYLES (Style Sheet) -->
+  <!-- ------------------------------------------------------------------------- -->
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    /* ======================================================================== */
+    /* GENERAL RESET & FONT SETTINGS */
+    /* ======================================================================== */
+    /* Reset margins and paddings for consistent cross-browser look */
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      /* Use Plus Jakarta Sans as default font for the entire page */
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+    }
     
+    /* Ensure the body and html take up full height and width */
     html, body {
       width: 100%;
       min-height: 100vh;
-      background: #000;
+      background: #000; /* Fallback color if video fails */
       color: #fff;
     }
 
-    /* 🎥 HD SALON BACKGROUND VIDEO 🎥 */
+    /* ======================================================================== */
+    /* BACKGROUND HD SALON VIDEO STYLES */
+    /* ======================================================================== */
     .bg-video {
       position: fixed;
       top: 50%;
@@ -32,16 +107,19 @@
       min-height: 100%;
       width: auto;
       height: auto;
-      z-index: 1;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      filter: brightness(0.35) blur(1px);
-      pointer-events: none;
+      z-index: 1; /* Place the video behind all other content */
+      transform: translate(-50%, -50%); /* Center the video */
+      object-fit: cover; /* Cover the entire area without distortion */
+      filter: brightness(0.35) blur(1px); /* Darken and blur the video slightly for text readability */
+      pointer-events: none; /* Let clicks pass through the video to content below */
     }
 
+    /* ======================================================================== */
+    /* MAIN APPLICATION SCREEN STYLES (Content Layer) */
+    /* ======================================================================== */
     .app-screen {
       position: relative;
-      z-index: 2;
+      z-index: 2; /* Place content above the background video */
       width: 100%;
       min-height: 100vh;
       display: flex;
@@ -50,24 +128,32 @@
       justify-content: flex-start;
       padding: 18px 14px 30px 14px;
       text-align: center;
-      overflow-y: auto;
-      gap: 14px;
+      overflow-y: auto; /* Allow vertical scrolling if content is too large */
+      gap: 14px; /* Default spacing between major sections */
     }
 
-    .brand-header { width: 100%; }
+    /* ======================================================================== */
+    /* BRAND HEADER STYLES */
+    /* ======================================================================== */
+    .brand-header { 
+      width: 100%; 
+    }
 
+    /* Styling for the main brand name "SOUNDARYAM BEAUTY ZONE" */
     .brand-name {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel', serif; /* Use the Cinzel font */
       font-size: 26px;
       font-weight: 800;
       letter-spacing: 2px;
+      /* Gold gradient effect for text */
       background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
-      text-shadow: 0 0 20px rgba(255, 226, 89, 0.5);
+      text-shadow: 0 0 20px rgba(255, 226, 89, 0.5); /* Glowing gold text shadow */
     }
 
+    /* Styling for the subtitle "LUXURY BEAUTY & HAIR STUDIO" */
     .brand-subtitle {
       color: #e0d5f5;
       font-size: 11px;
@@ -77,26 +163,57 @@
       font-weight: 700;
     }
 
+    /* Container for the direct call/whatsapp number */
     .contact-info {
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.65); /* Semi-transparent black background */
+      backdrop-filter: blur(10px); /* Frosted glass effect */
       padding: 6px 18px;
       border-radius: 30px;
       font-size: 12px;
       font-weight: 800;
-      color: #ffd700;
+      color: #ffd700; /* Gold text */
       display: inline-block;
       margin-top: 6px;
-      border: 1px solid rgba(255, 215, 0, 0.5);
+      border: 1px solid rgba(255, 215, 0, 0.5); /* Semi-transparent gold border */
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
-    .offer-details { width: 100%; }
-    .offer-title { font-size: 20px; font-weight: 900; color: #ffffff; margin-bottom: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-    .offer-desc { color: #e2d7f5; font-size: 12px; line-height: 1.4; max-width: 330px; margin: 0 auto; font-weight: 600; }
-    .highlight-text { color: #ffd700; font-weight: 800; }
+    /* ======================================================================== */
+    /* OFFER DETAILS STYLES */
+    /* ======================================================================== */
+    .offer-details { 
+      width: 100%; 
+    }
 
-    /* 🎴 SCRATCH CARD CONTAINER 🎴 */
+    /* Title for the scratch card area */
+    .offer-title { 
+      font-size: 20px; 
+      font-weight: 900; 
+      color: #ffffff; 
+      margin-bottom: 2px; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+    }
+
+    /* Offer description text with limits */
+    .offer-desc { 
+      color: #e2d7f5; 
+      font-size: 12px; 
+      line-height: 1.4; 
+      max-width: 330px; 
+      margin: 0 auto; 
+      font-weight: 600; 
+    }
+
+    /* Highlight text color for numbers or key info */
+    .highlight-text { 
+      color: #ffd700; 
+      font-weight: 800; 
+    }
+
+    /* ======================================================================== */
+    /* SCRATCH CARD CONTAINER & FOIL STYLES */
+    /* ======================================================================== */
+    /* Main container for the canvas and the hidden reward layer */
     .scratch-container {
       position: relative;
       width: 320px;
@@ -104,27 +221,34 @@
       min-height: 200px;
       flex-shrink: 0;
       border-radius: 20px;
-      overflow: hidden;
+      overflow: hidden; /* Important for the dashed border to show correctly */
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.4);
       margin: 2px 0;
       transition: transform 0.4s ease;
     }
 
+    /* Class added dynamically via JavaScript upon scratch */
     .scratch-container.pop-effect {
       animation: big3DPop 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
+    /* Animation definition for the 3D Pop Effect */
     @keyframes big3DPop {
       0% { transform: scale(1) rotate(0deg); }
+      /* Zoom in and tilt slightly */
       40% { transform: scale(1.18) rotate(-2deg); box-shadow: 0 35px 70px rgba(0,0,0,0.95), 0 0 60px rgba(255, 215, 0, 0.9); }
+      /* Back down and tilt in the other direction */
       70% { transform: scale(0.96) rotate(1deg); }
+      /* Final state at normal size */
       100% { transform: scale(1) rotate(0deg); }
     }
 
+    /* Hidden layer revealed after scratch is done */
     .reward-layer {
       position: absolute;
       width: 100%;
       height: 100%;
+      /* Gradient light pink to white background */
       background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
       border-radius: 20px;
       display: flex;
@@ -132,12 +256,17 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
+      /* Pink dashed border */
       border: 4px dashed #e91e63;
     }
 
+    /* Header in the revealed layer */
     .reward-layer h3 { color: #880e4f; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; }
-    .reward-layer h2 { color: #d81b60; font-size: 24px; font-weight: 900; margin: 4px 0; text-align: center; line-height: 1.2; }
     
+    /* Main offer title in the revealed layer */
+    .reward-layer h2 { color: #d81b60; font-size: 24px; font-weight: 900; margin: 6px 0; text-align: center; line-height: 1.2; }
+    
+    /* The small voucher tag within the revealed layer */
     .voucher-tag {
       background: #fce4ec;
       color: #c2185b;
@@ -149,6 +278,7 @@
       letter-spacing: 0.5px;
     }
 
+    /* Styling for the HTML Canvas element */
     canvas {
       position: absolute;
       top: 0;
@@ -156,17 +286,23 @@
       width: 100%;
       height: 100%;
       cursor: pointer;
+      /* Disable default touch handling for better scratch detection */
       touch-action: none;
+      /* Transition for smooth fade out */
       transition: opacity 0.4s ease-out;
     }
 
-    /* 📘 HOW TO USE SECTION 📘 */
+    /* ======================================================================== */
+    /* HOW TO USE VOUCHER STYLES */
+    /* ======================================================================== */
+    /* Styling for the section that explains how to use the voucher */
     .how-to-use-card {
       width: 100%;
       max-width: 330px;
-      background: rgba(12, 6, 25, 0.7);
+      background: rgba(12, 6, 25, 0.7); /* Deep velvet dark background */
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      /* Semi-transparent gold border */
       border: 1.5px solid rgba(255, 215, 0, 0.35);
       border-radius: 16px;
       padding: 12px 16px;
@@ -175,10 +311,11 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.5);
     }
 
+    /* Title for the "How to Use" section */
     .how-title {
       font-size: 12px;
       font-weight: 900;
-      color: #ffd700;
+      color: #ffd700; /* Gold text */
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 8px;
@@ -187,23 +324,29 @@
       gap: 6px;
     }
 
+    /* List of steps in the "How to Use" section */
     .how-steps {
       font-size: 12px;
       color: #f0f0f0;
       line-height: 1.6;
-      padding-left: 18px;
+      padding-left: 18px; /* Room for numbers */
       font-weight: 600;
     }
 
+    /* Margins between steps */
     .how-steps li { margin-bottom: 4px; }
 
-    /* 💎 CLAIM INSTRUCTION CARD 💎 */
+    /* ======================================================================== */
+    /* CLAIM VOUCHER via WhatsApp STYLES */
+    /* ======================================================================== */
+    /* Styling for the final card section to claim the voucher */
     .instruction-card {
       width: 100%;
       max-width: 330px;
-      background: rgba(15, 8, 30, 0.8);
+      background: rgba(15, 8, 30, 0.8); /* Solid deep dark background */
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
+      /* Transparent gold border */
       border: 1.5px solid rgba(255, 215, 0, 0.4);
       border-radius: 18px;
       padding: 14px 16px;
@@ -212,6 +355,7 @@
       flex-shrink: 0;
     }
 
+    /* Gold gradient badge above the main text */
     .instruction-badge {
       display: inline-block;
       background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
@@ -225,6 +369,7 @@
       margin-bottom: 8px;
     }
 
+    /* Text within the claim voucher card */
     .instruction-text {
       color: #ffffff;
       font-size: 12px;
@@ -232,14 +377,17 @@
       font-weight: 600;
     }
 
+    /* Specific highlights within the text */
     .instruction-text span { color: #ffd700; font-weight: 800; }
 
+    /* WhatsApp claim button styles */
     .wa-link-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       margin-top: 10px;
+      /* WhatsApp Green gradient background */
       background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
       color: #ffffff;
       font-weight: 800;
@@ -253,18 +401,31 @@
 </head>
 <body>
 
-  <!-- 🎥 HD SALON BACKGROUND VIDEO 🎥 -->
+  <!-- ========================================================================= -->
+  <!-- 5. BACKGROUND VIDEO ELEMENT -->
+  <!-- ========================================================================= -->
+  <!-- 
+    The background video plays on loop, is muted, and plays inline.
+    The 'poster' is used as a fallback if the video doesn't play.
+    Link updated for reliability.
+  -->
   <video id="bgVideo" class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1000">
     <source src="https://v.ftcdn.net/03/05/26/66/700_F_305266671_7KxS1V1n9P3rEaY9kG4nZ1m1u9sK5X3K_ST.mp4" type="video/mp4">
   </video>
 
+  <!-- ========================================================================= -->
+  <!-- 6. CONTENT LAYER -->
+  <!-- ========================================================================= -->
   <div class="app-screen">
+    
+    <!-- BRAND HEADER SECTION -->
     <div class="brand-header">
       <div class="brand-name">Soundaryam Beauty Zone</div>
       <div class="brand-subtitle">Luxury Beauty & Hair Studio</div>
       <div class="contact-info">📞 Call / WhatsApp: +91 9910711437</div>
     </div>
 
+    <!-- OFFER DETAILS & TITLE SECTION -->
     <div class="offer-details">
       <div class="offer-title">Scratch & Win 🪙</div>
       <div class="offer-desc">
@@ -273,18 +434,20 @@
       </div>
     </div>
 
-    <!-- 🎴 SCRATCH CARD 🎴 -->
+    <!-- SCRATCH CARD AREA -->
     <div class="scratch-container" id="cardContainer">
+      <!-- Hidden reward layer, revealed only after scratching -->
       <div class="reward-layer">
         <h3>🎉 CONGRATULATIONS! 🎉</h3>
         <h2 class="rewardTitle">FREE Service</h2>
         <p style="color: #666; font-size: 11px; font-weight: 700;">Valid on billing of ₹500+</p>
         <div class="voucher-tag">SOUNDARYAM EXCLUSIVE VOUCHER</div>
       </div>
+      <!-- Canvas element covering the reward layer -->
       <canvas id="scratchCanvas" width="320" height="200"></canvas>
     </div>
 
-    <!-- 📘 HOW TO USE VOUCHER 📘 -->
+    <!-- HOW TO USE SECTION -->
     <div class="how-to-use-card">
       <div class="how-title">💡 How to Use Voucher</div>
       <ol class="how-steps">
@@ -294,27 +457,42 @@
       </ol>
     </div>
 
-    <!-- 💎 CLAIM VOUCHER VIA WHATSAPP 💎 -->
+    <!-- CLAIM VOUCHER VIA WHATSAPP SECTION -->
     <div class="instruction-card">
       <div class="instruction-badge">Claim Voucher</div>
       <div class="instruction-text">
         📸 <b>Take a screenshot of your scratched voucher!</b><br>
         Send it to <span>+91 9910711437</span> on WhatsApp to redeem your FREE service on bookings worth ₹500+.
       </div>
+      <!-- Pre-formatted dynamic WhatsApp chat button -->
       <a class="wa-link-btn" id="waDirectBtn" href="#" target="_blank">
         Send Screenshot on WhatsApp ➔
       </a>
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- 7. INTERNAL JAVASCRIPT CODE (Client-Side Logic) -->
+  <!-- ========================================================================= -->
   <script>
-    // 🎥 Force Video Playback for Mobile Browsers
+    /* ======================================================================== */
+    /* 1. INITIALIZATION & SETUP */
+    /* ======================================================================== */
+    
+    // Force Video Playback for Mobile Browsers: Often autoblocked by iOS/Android
     const video = document.getElementById('bgVideo');
-    const playVideo = () => { if(video && video.paused) video.play(); };
+    // Function to attempt to play the video
+    const playVideo = () => { 
+      if(video && video.paused) {
+        // Attempt to play, catch error if still blocked
+        video.play().catch(e => { console.log('Video autoblocked', e); });
+      }
+    };
+    // Play on any user interaction (touch or click)
     document.addEventListener('touchstart', playVideo, {once: true});
     document.addEventListener('click', playVideo, {once: true});
 
-    // 🎲 RANDOM OFFERS
+    // List of offers to be randomly picked for the customer
     const offers = [
       { title: "FREE Head Massage", code: "HEADMASSAGE500" },
       { title: "FREE Thread Work", code: "THREADWORK500" },
@@ -325,30 +503,45 @@
       { title: "FREE Hair Spa Session", code: "HAIRSPA500" }
     ];
 
+    // Pick a random offer from the list
     const randomOffer = offers[Math.floor(Math.random() * offers.length)];
+    // Find all elements with class 'rewardTitle' and set their text to the random offer title
     document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = randomOffer.title);
 
     // 📱 WhatsApp Direct Link Setup (+91 9910711437)
-    const waNumber = "919910711437"; 
-    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! I scratched my voucher and won a ${randomOffer.title}! Attached is my screenshot for claim on billing ₹500+ (Voucher Code: ${randomOffer.code})`);
+    const waNumber = "919910711437"; // Indian format without + sign
+    // Format the text message that will be dynamically updated with the offer
+    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! ✨\nI scratched my voucher and won: *${randomOffer.title}*!\n\nI have taken a screenshot of my winning card for redemption on billing ₹500+. (Voucher Code: ${randomOffer.code})`);
+    // Find the WhatsApp button and set its HREF dynamically
     document.getElementById('waDirectBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
 
+    // Get Canvas and Canvas Context
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
     const cardContainer = document.getElementById('cardContainer');
-    let isDrawing = false;
-    let isUnlocked = false;
+    
+    // State variables
+    let isDrawing = false; // Is the user currently scratching?
+    let isUnlocked = false; // Has the card been revealed already?
 
+    /* ======================================================================== */
+    /* 2. CANVAS SCRATCH INITIALIZATION (Draw the gold foil) */
+    /* ======================================================================== */
+    // This function draws the gold cover foil on top of the reward layer.
     function initCanvas() {
+      // Create a linear gold gradient for the foil effect
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, '#BF953F');
-      grad.addColorStop(0.25, '#FCF6BA');
-      grad.addColorStop(0.5, '#B38728');
-      grad.addColorStop(0.75, '#FBF5B7');
-      grad.addColorStop(1, '#AA771C');
+      grad.addColorStop(0, '#BF953F'); // Darker Gold
+      grad.addColorStop(0.25, '#FCF6BA'); // Lighter Champagne Gold
+      grad.addColorStop(0.5, '#B38728'); // Mid Gold
+      grad.addColorStop(0.75, '#FBF5B7'); // Light Gold
+      grad.addColorStop(1, '#AA771C'); // Darker Gold
+      
+      // Set default fill style and draw a rectangle across the whole canvas
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Add texture on top of the foil: Simple semi-transparent diagonal lines
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.lineWidth = 2;
       for (let i = -100; i < canvas.width + 100; i += 20) {
@@ -358,7 +551,8 @@
         ctx.stroke();
       }
 
-      ctx.fillStyle = '#3d2b00';
+      // Add instructions on top of the foil for the user
+      ctx.fillStyle = '#3d2b00'; // Deep dark gold text color
       ctx.font = '900 18px sans-serif';
       ctx.textAlign = 'center';
       ctx.shadowColor = 'rgba(255,255,255,0.6)';
@@ -366,47 +560,75 @@
       ctx.fillText('✨ SCRATCH HERE ✨', canvas.width / 2, canvas.height / 2 + 6);
     }
 
+    /* ======================================================================== */
+    /* 3. SCRATCH DETECTION & LOGIC */
+    /* ======================================================================== */
+    // Helper function to get mouse or touch position relative to the canvas
     function getMousePos(e) {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
+      return { 
+        x: clientX - rect.left, 
+        y: clientY - rect.top 
+      };
     }
 
+    // Main scratching function, called whenever user moves the mouse or touch while pressing
     function scratch(e) {
       if (!isDrawing || isUnlocked) return;
-      e.preventDefault();
+      e.preventDefault(); // Prevent page scrolling while scratching
+      
       const pos = getMousePos(e);
 
+      // Use 'destination-out' operation to make parts of the foil transparent
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(pos.x, pos.y, 30, 0, Math.PI * 2);
+      // Draw a circle where the pointer is, make the foil transparent there
+      ctx.arc(pos.x, pos.y, 30, 0, Math.PI * 2); // Radius of 30px brush size
       ctx.fill();
 
+      // Check how much percentage of the foil has been cleared
       checkScratchedPercent();
     }
 
+    /* ======================================================================== */
+    /* 4. PERCENTAGE CHECK & CONFETTI REVEAL */
+    /* ======================================================================== */
+    // This function checks the transparency of canvas pixels to calculate the percentage.
     function checkScratchedPercent() {
+      // Don't check again if already unlocked
       if (isUnlocked) return;
+      
+      // Get image data for the whole canvas
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       let cleared = 0;
       
+      // Iterate through every 16th pixel (4x4 grid sampling) for performance
+      // i=3 is the alpha channel (transparency)
       for (let i = 3; i < imageData.data.length; i += 16) {
+        // Alpha of 0 means the foil has been cleared there
         if (imageData.data[i] === 0) cleared++;
       }
 
-      // 30% SCRATCH TRIGGER
+      // If more than 30% area has been cleared, trigger the reveal
       if (cleared / (imageData.data.length / 16) > 0.30) {
         isUnlocked = true;
         
+        // 1. Smooth Auto Clear remaining foil: Fade out the canvas
         canvas.style.opacity = '0';
-        setTimeout(() => { ctx.clearRect(0, 0, canvas.width, canvas.height); }, 400);
+        // After fade out transition (400ms), officially clear the canvas
+        setTimeout(() => { 
+          ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        }, 400);
 
+        // 2. Add Pop Effect Animation Class to the main card container
         cardContainer.classList.add('pop-effect');
 
+        // 3. BLAST BALLOONS & CONFETTI using the canvas-confetti library 🎉🎈
         try {
           const count = 200;
-          const defaults = { origin: { y: 0.6 } };
+          const defaults = { origin: { y: 0.6 } }; // Origin y: 0.6 (slightly above bottom of screen)
 
           function fire(particleRatio, opts) {
             confetti(Object.assign({}, defaults, opts, {
@@ -414,25 +636,51 @@
             }));
           }
 
+          // Varying confetti spreads and velocities for realism
           fire(0.25, { spread: 26, startVelocity: 55 });
           fire(0.2, { spread: 60 });
           fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
           fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
           fire(0.1, { spread: 120, startVelocity: 45 });
-        } catch(err){}
+        } catch(err){
+          console.error("Confetti blast failed", err);
+        }
       }
     }
 
-    canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
-    canvas.addEventListener('mouseup', () => isDrawing = false);
-    canvas.addEventListener('mouseleave', () => isDrawing = false);
+    /* ======================================================================== */
+    /* 5. EVENT LISTENERS SETUP */
+    /* ======================================================================== */
+    
+    // Desktop Event Listeners (Mouse Interactions)
+    // When mouse is pressed, start drawing
+    canvas.addEventListener('mousedown', (e) => { 
+      isDrawing = true; scratch(e); 
+    });
+    // When mouse is released anywhere, stop drawing
+    canvas.addEventListener('mouseup', () => { isDrawing = false; });
+    // When mouse leaves the canvas, stop drawing
+    canvas.addEventListener('mouseleave', () => { isDrawing = false; });
+    // Whenever mouse moves, attempt scratching if pressed
     canvas.addEventListener('mousemove', scratch);
 
-    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false});
-    canvas.addEventListener('touchend', () => isDrawing = false);
+    // Mobile Event Listeners (Touch Interactions)
+    // Passive: false allows us to use preventDefault() to block page scrolling while scratching
+    // When touch starts
+    canvas.addEventListener('touchstart', (e) => { 
+      isDrawing = true; scratch(e); 
+    }, {passive: false});
+    // When touch ends
+    canvas.addEventListener('touchend', () => { isDrawing = false; });
+    // When touch moves, attempt scratching
     canvas.addEventListener('touchmove', scratch, {passive: false});
 
+    /* ======================================================================== */
+    /* 6. FINAL EXECUTION */
+    /* ======================================================================== */
+    // Initialize the canvas gold foil upon page load
     initCanvas();
+    
   </script>
 </body>
 </html>
