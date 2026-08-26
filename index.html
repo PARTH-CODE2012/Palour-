@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- ========================================================================= -->
 <!--               SOUNDARYAM BEAUTY ZONE - CUSTOM SCRATCH VOUCHER             -->
-<!--           (WhatsApp Sharing Version - Low Cost Offers Only)                -->
+<!--           (WhatsApp Version + One-Time Scratch Lock Protection)            -->
 <!-- ========================================================================= -->
 <!-- 
   File: index.html
   Project: Soundaryam Beauty Zone Scratch Voucher App (WhatsApp Version)
-  Version: 2.1.final
+  Version: 2.2.final (With One-Time Scratch Lock)
   Author: AI Assistant
   License: Custom Use for Soundaryam Beauty Zone
 -->
@@ -367,7 +367,7 @@
     document.addEventListener('touchstart', playVideo, {once: true});
     document.addEventListener('click', playVideo, {once: true});
 
-    // 🟢 यहाँ केवल सस्ते और बजट वाले ऑफर्स रखे गए हैं (हेयर स्पा और महंगे वाले हटा दिए गए हैं)
+    // 🟢 बजट वाले ऑफर्स की लिस्ट
     const offers = [
       { title: "FREE Thread Work", code: "THREAD500" },
       { title: "FREE Face Clean Up", code: "CLEANUP500" },
@@ -377,11 +377,24 @@
       { title: "FREE Eyebrows + Upper Lip", code: "BROWS500" }
     ];
 
-    const randomOffer = offers[Math.floor(Math.random() * offers.length)];
-    document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = randomOffer.title);
+    // Check if user has already scratched before in this browser session/device
+    let savedOffer = localStorage.getItem('soundaryam_won_offer');
+    let selectedOffer;
 
+    if (savedOffer) {
+      // If already scratched before, load their previously won offer so it stays consistent
+      selectedOffer = JSON.parse(savedOffer);
+    } else {
+      // Pick a random offer for the first time
+      selectedOffer = offers[Math.floor(Math.random() * offers.length)];
+    }
+
+    // Set title on the reward layer
+    document.querySelectorAll('.rewardTitle').forEach(el => el.innerText = selectedOffer.title);
+
+    // 📱 WhatsApp Direct Link Setup
     const waNumber = "919910711437"; 
-    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! ✨\nI scratched my voucher and won: *${randomOffer.title}*!\n\nI have taken a screenshot of my winning card for redemption on billing ₹500+. (Voucher Code: ${randomOffer.code})`);
+    const waText = encodeURIComponent(`Hi Soundaryam Beauty Zone! ✨\nI scratched my voucher and won: *${selectedOffer.title}*!\n\nI have taken a screenshot of my winning card for redemption on billing ₹500+. (Voucher Code: ${selectedOffer.code})`);
     document.getElementById('waDirectBtn').href = `https://wa.me/${waNumber}?text=${waText}`;
 
     const canvas = document.getElementById('scratchCanvas');
@@ -390,6 +403,14 @@
     
     let isDrawing = false;
     let isUnlocked = false;
+
+    // If already scratched before, instantly hide the canvas foil so they see it's locked/already used
+    if (savedOffer) {
+      canvas.style.display = 'none';
+      isUnlocked = true;
+    } else {
+      initCanvas();
+    }
 
     function initCanvas() {
       const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -456,9 +477,13 @@
       if (cleared / (imageData.data.length / 16) > 0.30) {
         isUnlocked = true;
         
+        // 🔒 Save to localStorage so this device/browser can never scratch again!
+        localStorage.setItem('soundaryam_won_offer', JSON.stringify(selectedOffer));
+
         canvas.style.opacity = '0';
         setTimeout(() => { 
           ctx.clearRect(0, 0, canvas.width, canvas.height); 
+          canvas.style.display = 'none';
         }, 400);
 
         cardContainer.classList.add('pop-effect');
@@ -493,7 +518,9 @@
     canvas.addEventListener('touchend', () => { isDrawing = false; });
     canvas.addEventListener('touchmove', scratch, {passive: false});
 
-    initCanvas();
+    if (!savedOffer) {
+      initCanvas();
+    }
   </script>
 </body>
 </html>
